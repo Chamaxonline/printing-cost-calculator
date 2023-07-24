@@ -14,13 +14,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link href="/admin">Admin</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact</Link>
-          </li>
-          <li>
-            <Link href="/about">About</Link>
-          </li>
+          </li>     
         </ul>
       </div>
     </div>
