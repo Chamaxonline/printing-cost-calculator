@@ -42,6 +42,8 @@ const PatientPage: MyPage = () => {
   const [selectedPaperValue, setSelectedValue] = useState(options[0].value);
   const [inputQty, setInputQtyValue] = useState("");
   const [totalSheets, setResultValue] = useState("");
+  const [costofSheet, setCostofSheet] = useState<string | undefined>(undefined);
+  const [totalPaperCost, setTotalPaperCost] = useState();
 
   // Calculate the result value whenever inputValue or selectedValue changes
   useEffect(() => {
@@ -75,6 +77,7 @@ const PatientPage: MyPage = () => {
       console.error("An error occurred while submitting the form:", error);
     }
   };
+
   return (
     <>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
@@ -95,7 +98,12 @@ const PatientPage: MyPage = () => {
                   <div className="lg:col-span-2">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                       <div className="md:col-span-2">
-                        <label htmlFor="lastName">Qty</label>
+                        <label
+                          htmlFor="lastName"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Qty
+                        </label>
                         <input
                           type="text"
                           name="qty"
@@ -109,7 +117,7 @@ const PatientPage: MyPage = () => {
 
                       <div className="md:col-span-2">
                         <label
-                          htmlFor="default"
+                          htmlFor="paper"
                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
                           Paper
@@ -177,7 +185,12 @@ const PatientPage: MyPage = () => {
                       </div>
 
                       <div className="md:col-span-2">
-                        <label htmlFor="lastName">Total Sheets</label>
+                        <label
+                          htmlFor="lastName"
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Total Sheets
+                        </label>
                         <input
                           type="text"
                           name="totalSheets"
@@ -190,19 +203,20 @@ const PatientPage: MyPage = () => {
                       </div>
                       <div className="md:col-span-5">
                         <div className="relative">
+                         
+                          <label
+                            htmlFor="disabled_filled"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                            Job New Total
+                          </label>
                           <input
                             type="text"
                             id="disabled_filled"
-                            className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                            className="h-10 border mt-1 rounded px-4 w-50 bg-gray-50"
                             placeholder=" "
                             disabled
                           />
-                          <label
-                            htmlFor="disabled_filled"
-                            className="absolute text-sm text-gray-400 dark:text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-                          >
-                            Job New Total
-                          </label>
                         </div>
                       </div>
                       <div className="md:col-span-5 text-right">
