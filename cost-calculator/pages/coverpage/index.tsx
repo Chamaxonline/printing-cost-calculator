@@ -203,12 +203,79 @@ const PatientPage: MyPage = () => {
                       </div>
                       <div className="md:col-span-5">
                         <div className="relative">
-                         
                           <label
                             htmlFor="disabled_filled"
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                            Job New Total
+                          >
+                            Job Total
+                          </label>
+                          <input
+                            type="text"
+                            id="disabled_filled"
+                            className="h-10 border mt-1 rounded px-4 w-50 bg-gray-50"
+                            placeholder=" "
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-5">
+                        <div className="relative">
+                          <label
+                            htmlFor="disabled_filled"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Unit Price
+                          </label>
+                          <input
+                            type="text"
+                            id="disabled_filled"
+                            className="h-10 border mt-1 rounded px-4 w-50 bg-gray-50"
+                            placeholder=" "
+                            disabled
+                          />
+                        </div>
+                      </div>
+
+                      <div className="md:col-span-5">
+                        <div className="relative">
+                          <label
+                            htmlFor="disabled_filled"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Discount
+                          </label>
+                          <input
+                            type="text"
+                            id="disabled_filled"
+                            className="h-10 border mt-1 rounded px-4 w-50 bg-gray-50"
+                            placeholder=" "
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-5">
+                        <div className="relative">
+                          <label
+                            htmlFor="disabled_filled"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Job Total New
+                          </label>
+                          <input
+                            type="text"
+                            id="disabled_filled"
+                            className="h-10 border mt-1 rounded px-4 w-50 bg-gray-50"
+                            placeholder=" "
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div className="md:col-span-5">
+                        <div className="relative">
+                          <label
+                            htmlFor="disabled_filled"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Unit Price New
                           </label>
                           <input
                             type="text"
