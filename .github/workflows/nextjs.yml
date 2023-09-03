@@ -29,10 +29,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install NPM dependencies
-        working-directory: printing-cost-calculator/cost-calculator
+        working-directory: cost-calculator
         run: npm install
       - name: Build project assets
-        working-directory: printing-cost-calculator/cost-calculator
+        working-directory: cost-calculator
         run: npm run build        
       - name: Upload static site content
         uses: actions/upload-artifact@v3
