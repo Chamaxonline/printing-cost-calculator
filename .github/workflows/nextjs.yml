@@ -46,6 +46,7 @@ jobs:
           fi
       - name: Build project assets
         run: npm run build
+        working-directory: printing-cost-calculator
       - name: Upload static site content
         uses: actions/upload-artifact@v3
         with:
