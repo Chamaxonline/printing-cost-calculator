@@ -70,3 +70,15 @@ jobs:
               name: static-site
           - name: Test artifact download
             run: ls-R
+
+          - name: Upload Build Artifacts
+            uses: actions/upload-artifact@v2
+            with:
+              name: static-site   # Should match the download step
+              path: path/to/artifact
+
+          - name: Download Build Artifacts
+            uses: actions/download-artifact@v2
+            with:
+              name: static-site   # Should match the upload step
+              path: path/to/download/location
