@@ -15,7 +15,6 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
-    debugger
     if (!Array.isArray(data)) {
         return null; // Or display a loading message/error message
       }

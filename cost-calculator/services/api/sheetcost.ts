@@ -11,7 +11,6 @@ export interface Patient {
 
 export async function submitFormData(formData: Patient) {
   try {
-    debugger
     const response = await fetch(`${base_url + api_url}/register`, {
       method: 'POST',
       headers: {
