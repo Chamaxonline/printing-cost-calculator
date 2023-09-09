@@ -85,7 +85,7 @@ jobs:
               name: static-site   # Should match the upload step
               path: path/to/download/location
 
-    Deploy-Production:
+  Deploy-Production:
         runs-on: ubuntu-latest
         steps:
           - uses: actions/checkout@v2
