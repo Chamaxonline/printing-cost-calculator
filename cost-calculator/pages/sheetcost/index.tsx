@@ -2,22 +2,56 @@ import { MyPage } from "@/components/common/types";
 import firebase from "firebase/app";
 import "firebase/database";
 import db from "../../lib/firebase";
-import { getDatabase, ref, push, remove } from "firebase/database";
-import { useState } from "react";
+import { getDatabase, ref, push, remove, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import SheetCostList from "@/components/sheetcost/sheetcostlist";
+import SheetCost from "@/model/sheetcost";
 
 const PatientPage: MyPage = () => {
   const [sheetName, setSheet] = useState("");
   const [price, setPrice] = useState("");
   const id = uuidv4();
+  
+
 
   const sheet = {
     id,
     sheetName,
     price,
   };
-
+ 
+  const [sheets, setSheets] = useState<SheetCost[]>([]);
+  
+    useEffect(() => {
+      // Fetch the vehicle data from Firebase
+      const fetchData = async () => {
+        const database = getDatabase();
+        const dataRef = ref(database, "path/to/sheetcost");
+  
+        try {
+          onValue(dataRef, (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+              // Convert the data object into an array
+            const costs =  Object.entries<SheetCost>(data).map(([key, value]) => ({
+                Id: key,
+                ...value,
+              }));
+              setSheets(costs);
+            } else {
+              // Handle the case when there is no data
+              setSheets([]);
+            }
+          });
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const database = db;
@@ -48,13 +82,14 @@ const PatientPage: MyPage = () => {
         <div>
           <h2 className="font-semibold text-xl text-gray-600">Sheet Cost</h2>
           <p className="text-gray-500 mb-6">Enter Sheet Details here.</p>
+          <SheetCostList costs={sheets}/>
           <form onSubmit={handleSubmit}>
             <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                {/* <div className="text-gray-600">
+                 <div className="text-gray-600">
                     <p className="font-medium text-lg">Sheet Cost</p>
                     <p>Please fill out all the fields.</p>
-                  </div> */}
+                  </div> 
 
                 <div className="lg:col-span-2">
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
@@ -97,6 +132,7 @@ const PatientPage: MyPage = () => {
           </form>
         </div>
       </div>
+      
     </div>
   );
 };
