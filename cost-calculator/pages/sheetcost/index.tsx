@@ -35,8 +35,8 @@ const PatientPage: MyPage = () => {
             const data = snapshot.val();
             if (data) {
               // Convert the data object into an array
-            const costs =  Object.entries(data).map(([key, value]) => ({
-                id: key,
+            const costs =  Object.entries<SheetCost>(data).map(([key, value]) => ({
+                Id: key,
                 ...value,
               }));
               setSheets(costs);
