@@ -105,7 +105,9 @@ a {
   padding-bottom: 10%;
   padding-top: 5%;
 }
-
+.buttonreset {
+margin:10px;
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
