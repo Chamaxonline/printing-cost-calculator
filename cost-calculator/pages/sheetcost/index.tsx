@@ -13,52 +13,55 @@ const PatientPage: MyPage = () => {
   const [sheetName, setSheet] = useState("");
   const [price, setPrice] = useState("");
   const id = uuidv4();
-  
-
 
   const sheet = {
     id,
     sheetName,
     price,
   };
- 
+
   const [sheets, setSheets] = useState<SheetCost[]>([]);
-  
-    useEffect(() => {
-      // Fetch the vehicle data from Firebase
-      const fetchData = async () => {
-        const database = getDatabase();
-        const dataRef = ref(database, "path/to/sheetcost");
-  
-        try {
-          onValue(dataRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-              // Convert the data object into an array
-            const costs =  Object.entries<SheetCost>(data).map(([key, value]) => ({
+
+  useEffect(() => {
+    // Fetch the vehicle data from Firebase
+    const fetchData = async () => {
+      const database = getDatabase();
+      const dataRef = ref(database, "path/to/sheetcost");
+
+      try {
+        onValue(dataRef, (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            // Convert the data object into an array
+            const costs = Object.entries<SheetCost>(data).map(
+              ([key, value]) => ({
                 Id: key,
                 ...value,
-              }));
-              setSheets(costs);
-            } else {
-              // Handle the case when there is no data
-              setSheets([]);
-            }
-          });
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-  
-      fetchData();
-    }, []);
+              })
+            );
+            setSheets(costs);
+          } else {
+            // Handle the case when there is no data
+            setSheets([]);
+          }
+        });
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    debugger;
     e.preventDefault();
     const database = db;
     const dataRef = ref(database, "path/to/sheetcost");
 
     push(dataRef, sheet)
       .then(() => {
+        setSheet("");
+        setPrice("");
         toast.success("Data saved successfully!", {
           position: toast.POSITION.TOP_RIGHT,
         });
@@ -69,8 +72,6 @@ const PatientPage: MyPage = () => {
         });
         console.error(error);
       });
-    // Reset the form fields
-    resetFields;
   };
   const resetFields = () => {
     setSheet("");
@@ -80,16 +81,13 @@ const PatientPage: MyPage = () => {
     <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
       <div className="container max-w-screen-lg mx-auto">
         <div>
-          <h2 className="font-semibold text-xl text-gray-600">Sheet Cost</h2>
-          <p className="text-gray-500 mb-6">Enter Sheet Details here.</p>
-          <SheetCostList costs={sheets}/>
           <form onSubmit={handleSubmit}>
             <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                 <div className="text-gray-600">
-                    <p className="font-medium text-lg">Sheet Cost</p>
-                    <p>Please fill out all the fields.</p>
-                  </div> 
+                <div className="text-gray-600">
+                  <p className="font-medium text-lg">Sheet Cost</p>
+                  <p>Please fill out all the fields.</p>
+                </div>
 
                 <div className="lg:col-span-2">
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
@@ -124,15 +122,26 @@ const PatientPage: MyPage = () => {
                           Submit
                         </button>
                       </div>
+                      <div className="inline-flex items-end buttonreset">
+                        <button
+                          type="button"
+                          onClick={resetFields}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Reset
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </form>
+          {/* <h2 className="font-semibold text-xl text-gray-600">Sheet Cost</h2>
+          <p className="text-gray-500 mb-6">Enter Sheet Details here.</p> */}
+          <SheetCostList costs={sheets} />
         </div>
       </div>
-      
     </div>
   );
 };
